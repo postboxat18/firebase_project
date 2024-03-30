@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterx_live_data/flutterx_live_data.dart';
 import 'package:string_extensions/string_extensions.dart';
 
+import 'BlocPattern/UploadRealTimeBlocPattern.dart';
 import 'ColorsFile.dart';
 import 'LoginScreen.dart';
 import 'UploadRealtimeDatabase.dart';
@@ -128,7 +129,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             onPressed: () {
                               Navigator.of(context, rootNavigator: true)
                                   .push(MaterialPageRoute(
-                                builder: (context) => UploadRealtimeDatabase(),
+                                builder: (context) => UploadRealTimeBlocPattern(),
                               ));
                             },
                             icon: const Icon(

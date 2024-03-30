@@ -6,6 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'BlocPattern/UploadRealTimeBlocPattern.dart';
 import 'ColorsFile.dart';
 import 'Home.dart';
 import 'LoginScreen.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: ColorsFile.Primary),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const UploadRealTimeBlocPattern(),
       debugShowCheckedModeBanner: false,
     );
   }
