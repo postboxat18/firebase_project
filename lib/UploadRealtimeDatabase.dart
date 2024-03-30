@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_ui_database/firebase_ui_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,8 @@ class _UploadRealtimeDatabaseState extends State<UploadRealtimeDatabase> {
       body: Center(
           child: Column(
         children: [
-
+          //existing data
+          getExistingData(),
           //NAME
           Padding(
               padding: EdgeInsets.fromLTRB(paddingWidth, 15, paddingWidth, 0),
@@ -79,7 +81,7 @@ class _UploadRealtimeDatabaseState extends State<UploadRealtimeDatabase> {
                     errorText: validatorName ? null : nameErr,
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(width: 2, color: ColorsFile.Secondary),
+                          BorderSide(width: 2, color: ColorsFile.Secondary),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2, color: ColorsFile.Gray2),
@@ -96,7 +98,7 @@ class _UploadRealtimeDatabaseState extends State<UploadRealtimeDatabase> {
               child: TextField(
                 controller: ageController,
                 textInputAction: TextInputAction.done,
-                  inputFormatters: [],
+                inputFormatters: [],
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
@@ -106,10 +108,9 @@ class _UploadRealtimeDatabaseState extends State<UploadRealtimeDatabase> {
                 decoration: InputDecoration(
                     labelText: "Age",
                     errorText: validatorAge ? null : ageErr,
-
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(width: 2, color: ColorsFile.Secondary),
+                          BorderSide(width: 2, color: ColorsFile.Secondary),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2, color: ColorsFile.Gray2),
@@ -162,5 +163,33 @@ class _UploadRealtimeDatabaseState extends State<UploadRealtimeDatabase> {
         .child("users")
         .push()
         .set({"name": name, "age": age});
+  }
+
+  getExistingData() {
+    var ref = FirebaseDatabase.instance.ref('users/-NcCLog_VvKTY1x7Wef4');
+    return FirebaseDatabaseListView(
+      query: ref,
+      itemBuilder: (context, doc) {
+        Map user = doc.value as Map;
+        return Card(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text("AGe:"),
+                  Text(user['age']),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("NAme:"),
+                  Text(user['name']),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

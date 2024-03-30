@@ -11,12 +11,12 @@ import 'Home.dart';
 import 'LoginScreen.dart';
 import 'SignUp.dart';
 import 'UtilsPreference.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UtilsPreference.init();
-
-  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -70,15 +70,14 @@ class _HomePageState extends State<HomePage> {
           MaterialPageRoute(
             builder: (context) => SignUpScreen(),
           ));
-    }
-    else {
-      if (isRememberMe=="false") {
+    } else {
+      if (isRememberMe == "false") {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => LoginScreen(),
             ));
-      }else {
+      } else {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -86,6 +85,5 @@ class _HomePageState extends State<HomePage> {
             ));
       }
     }
-
   }
 }
